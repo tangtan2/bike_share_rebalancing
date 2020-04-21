@@ -1,0 +1,13 @@
+## Bike Share Rebalancing
+
+This project was inspired by the paper "Towards Station-Level Demand Prediction for Effective Rebalancing in Bike-Sharing Systems" by Pierre Hulot and Daniel Aloise, presented at SIGKDD'18 [1].
+
+Most current bike-share systems use a simple model where docking stations trigger rebalancing trip requests once bike inventory at the station falls below a certain threshold. That threshold is static and calculated by averaging recent historical data. The authors of [1] propose a new model where historical data is used to train machine learning models that utilize weather and trip features to create a dynamic inventory model. Bike demand patterns are heavily reliant on time of day (e.g. rush hours) and weather (e.g. inclement weather could reduce traffic at otherwise busy times). This new dynamic model was ultimately able to outperform the constant inventory model used by a bike share company based on Montreal.
+
+This project takes the idea proposed in [1] and performs a characterization analysis on a possible extension of supplementing trip and weather data with neighbourhood crime levels. It has been suggested that the propensity for crime within a neighbourhood may be a factor in determining bike share usage through that neighbourhood. Thus, a complete set of weather, trip, and crime data was collected from institutions based in San Francisco. After preparation, this data was then used to train three different machine learning models, simple linear regression for a baseline, random forest, and gradient-boosted tree.
+
+After validation and testing, the results show that gradient-boosted tree outperformed the other two models. An interesting conclusion from this project is how skewed the distribution of trips throughout stations tends to be, resulting in a heavy-tail distribution of data samples per stations. In fact, results in [1] also show that only a subset of stations end up with well-trained models. Thus, the conclusion from this report is to propose a hybrid system, where machine learning with trip, weather, and crime data is used to predict dynamic demand for more popular stations, and the current constant inventory model is used for less popular stations.
+
+For more information, see "final_report.pdf" for a complete report on project methodology, results, and analysis, and see ipynb files for executable code, model formulations, and relevant SQL queries.
+
+[1] Hulot, P., Aloise, D. & Jena, S. (2018). *Towards Station-Level Demand Prediction for Effective Rebalancing in Bike-Sharing Systems.* KDD’18: Proceedings of the 24th ACM SIGKDD International Conference in Knowledge Discovery & Data Mining. pg. 378-386.
